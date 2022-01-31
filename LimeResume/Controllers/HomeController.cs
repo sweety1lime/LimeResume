@@ -32,5 +32,10 @@ namespace LimeResume.Controllers
         {
             return View();
         }
+
+        public IActionResult AllBase()
+        {
+            return View();
+        }
     }
 }
