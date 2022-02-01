@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<LimeResume.Models.Company>
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -45,33 +46,18 @@
                     </div>
                     <div class="features-extended-wrap">
                         <div class="container" id="block1">
-                            <div class="feature-extended">
-                                <div class="feature-extended-image is-revealing">
-                                    <img src="https://mpt.ru/files/studentu/bazi-praktik/%D0%A1%D0%BA%D0%BE%D0%BB%D0%BA%D0%BE%D0%B2%D0%BE.png" alt="Feature extended 01">
+                            @foreach (var item in Model)
+                            {
+                                <div class="feature-extended">
+                                    <div class="feature-extended-image is-revealing">
+                                        <img src="@item.Image" alt="Feature extended 01">
+                                    </div>
+                                    <div class="feature-extended-body is-revealing">
+                                        <h3 class="mt-0">@item.Name</h3>
+                                        <p class="mb-0">@item.Description</p>
+                                    </div>
                                 </div>
-                                <div class="feature-extended-body is-revealing">
-                                    <h3 class="mt-0">Сколково</h3>
-                                    <p class="mb-0">Инновационный центр «Сколково» — действующий в Москве современный научно-технологический инновационный комплекс по разработке и коммерциализации новых технологий, первый в Российской Федерации строящийся с нуля наукоград, а также территория, представляющая собой протуберанец за МКАД, и городской микрорайон Москвы.</p>
-                                </div>
-                            </div>
-                            <div class="feature-extended">
-                                <div class="feature-extended-image is-revealing">
-                                    <img src="https://mpt.ru/files/studentu/bazi-praktik/%D0%90%D0%B9%D1%82%D0%B8%20%D0%9B%D0%B8%D0%B3%D0%B0.png" alt="Feature extended 02">
-                                </div>
-                                <div class="feature-extended-body is-revealing">
-                                    <h3 class="mt-0">ООО "Айти Лига"</h3>
-                                    <p class="mb-0">Мы обеспечиваем своих клиентов безопасной и надежной IT-инфраструктурой, позволяя сформировать им комфортным и эффективным свой рабочий процесс, тем самым помогая реализовывать заложенный в организациях потенциал.</p>
-                                </div>
-                            </div>
-                            <div class="feature-extended">
-                                <div class="feature-extended-image is-revealing">
-                                    <img src="https://sun9-34.userapi.com/impg/Dfhw_mAykffmLAnYge6VfpgffGSyposjuz2vzA/XDg7lVLpunc.jpg?size=465x305&quality=96&sign=4382ab21ded644b0c4993281985fc598&type=album" alt="Feature extended 03">
-                                </div>
-                                <div class="feature-extended-body is-revealing">
-                                    <h3 class="mt-0">ООО "ПРАЙМТЕК"</h3>
-                                    <p class="mb-0">Разработка, внедрение и сервисное обслуживание специализированных программных и технических средств обработки, защиты и контроля защищённости информации (в том числе в интересах органов государственной власти Российской Федерации)</p>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>

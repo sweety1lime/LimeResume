@@ -1,14 +1,30 @@
-﻿@{
+﻿@model LimeResume.Models.Resume
+@{
     Layout = null;
- }
+
+    //award должен иметь вид "первая награда, вторая награда, третья, четвертая"
+    //skills должен иметь вид "название-проценты, название-проценты, название-проценты"
+    var awardList = new string[0];
+    if (Model.Awards != null)
+        awardList = Model.Awards.Split(", ");
+
+
+    var skillsmatrix = new List<string[]>();
+    if (Model.Skills != null)
+    {
+        var skills = Model.Awards.Split(", ").ToList();
+        foreach (var item in skills)
+            skillsmatrix.Add(item.Split("-"));
+    }
+}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html >
- <!--<![endif]-->
+<html>
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +56,7 @@
     <!-- Icomoon Icon Fonts-->
     <link href="~/css/profile/icomoon.css" rel="stylesheet" />
     <!-- Bootstrap  -->
-    <link href="~/css/profile/bootstrap.css" rel="stylesheet"  />
+    <link href="~/css/profile/bootstrap.css" rel="stylesheet" />
     <!-- Theme style  -->
     <link href="~/css/profile/data.css" rel="stylesheet" />
     <!-- Modernizr JS -->
@@ -51,7 +67,7 @@
 
 
 </head>
-<body  style="background: #191d21;">
+<body style="background: #191d21;">
     <div id="fh5co-main">
         <div class="fh5co-tab-wrap">
             <ul class="fh5co-tab-menu">
@@ -67,25 +83,16 @@
                             <figure>
                                 <img src="~/Images/avatar.jpg" alt="">
                             </figure>
-                            <h1>Claire Aguilar</h1>
-                            <p>Born and raised in <a href="#">Brooklyn</a>. Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the <a href="#">Semantics</a>, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 fh5co-counter">
-                            <div class="fh5co-number fh5co-left">10</div>
-                            <div class="fh5co-text">
-                                <h3 class="border-bottom">Years of experience in Web Design</h3>
-                                <p>Far far away, behind the word mountains, far from the countries.</p>
-                            </div>
+                            <h1>@Model.Fio</h1>
+                            <p>@Model.AboutU</p>
                         </div>
                     </div>
                     <ul class="fh5co-social">
-                        <li><a href="#"><i class="icon-envelope"></i></a></li>
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-instagram"></i></a></li>
-                        <li><a href="#"><i class="icon-google"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                        @*<li><a href="#"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-instagram"></i></a></li>*@
+                        <li><a href="@Model.Social"><i class="icon-google"></i></a></li>
+                        @*<li><a href="#"><i class="icon-linkedin"></i></a></li>*@
                     </ul>
                 </div>
             </div>
@@ -100,33 +107,11 @@
                                     <i class="icon-graduation-cap"></i>
                                 </div>
                                 <div class="fh5co-text">
-                                    <h2>2001-2004</h2>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
+                                    <h2>@Model.YearOfStart - @Model.YearOfEnd</h2>
+                                    <p>Московский приборостроительный техникум. Специальность @Model.Education</p>
                                 </div>
                             </div>
-
-                            <div class="fh5co-feature">
-                                <div class="fh5co-icon">
-                                    <i class="icon-graduation-cap"></i>
-                                </div>
-                                <div class="fh5co-text">
-                                    <h2>2004-2008</h2>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
-                                </div>
-                            </div>
-
-                            <div class="fh5co-feature">
-                                <div class="fh5co-icon">
-                                    <i class="icon-graduation-cap"></i>
-                                </div>
-                                <div class="fh5co-text">
-                                    <h2>2008-2012</h2>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
-                                </div>
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -137,41 +122,18 @@
 
                             <p>I have the privilege to work with these cool companies.</p>
 
-                            <div class="fh5co-feature">
-                                <div class="fh5co-icon">
-                                    <i class="icon-black-tie"></i>
+                            @foreach (var item in awardList)
+                            {
+                                <div class="fh5co-feature">
+                                    <div class="fh5co-icon">
+                                        <i class="icon-black-tie"></i>
+                                    </div>
+                                    <div class="fh5co-text">
+                                        <h3>@item</h3>
+                                    </div>
                                 </div>
-                                <div class="fh5co-text">
-                                    <h2>2008 - Present</h2>
-                                    <h3>XYZ Inc.</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
-                                </div>
-                            </div>
-
-                            <div class="fh5co-feature">
-                                <div class="fh5co-icon">
-                                    <i class="icon-black-tie"></i>
-                                </div>
-                                <div class="fh5co-text">
-                                    <h2>2004-2008</h2>
-                                    <h3>Previous Ltd Co.</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
-                                </div>
-                            </div>
-
-                            <div class="fh5co-feature">
-                                <div class="fh5co-icon">
-                                    <i class="icon-black-tie"></i>
-                                </div>
-                                <div class="fh5co-text">
-                                    <h2>1999-2004</h2>
-                                    <h3>Previous Ltd Co.</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries.</p>
-                                </div>
-                            </div>
-
+                            }
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -181,26 +143,12 @@
                         <div class="col-md-12">
                             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="95"><span><strong>HTML5</strong>95%</span></div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="93"><span><strong>CSS3</strong>93%</span></div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="90"><span><strong>jQuery</strong>90%</span></div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="89"><span><strong>PHP</strong>89%</span></div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="85"><span><strong>MySQL</strong>85%</span></div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                            <div class="chart" data-percent="90"><span><strong>AngularJS</strong>90%</span></div>
-                        </div>
-
+                        @foreach (var item in skillsmatrix)
+                        {
+                            <div class="col-md-4 col-sm-6 col-xs-12 text-center">
+                                <div class="chart" data-percent="@item[1]"><span><strong>@item[0]</strong>@item[1]%</span></div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
