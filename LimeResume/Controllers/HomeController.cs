@@ -45,7 +45,7 @@ namespace LimeResume.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrate(User user)
+        public async Task<IActionResult> RegAuth(User user)
         {
             if (ModelState.IsValid)
             {
@@ -62,18 +62,18 @@ namespace LimeResume.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.FirstOrDefault(u => u.Login == model.login && u.Password == model.password);
+                User user = db.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
                 if (user != null)
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimsIdentity.DefaultNameClaimType, model.login)
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, model.Login)
                     };
                     ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                     HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profile", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

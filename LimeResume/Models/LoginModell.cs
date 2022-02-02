@@ -4,11 +4,10 @@ namespace LimeResume.Models
 {
     public class LoginModell
     {
-        [Required(ErrorMessage = "Не указан Логин")]
-        public string login { get; set; }
-
-        [Required(ErrorMessage = "Не указан пароль")]
-        [DataType(DataType.Password)]
-        public string password { get; set; }
+        [Required(ErrorMessage = "Введите логин")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
+        public string Login { get; set; }
+        [Required(ErrorMessage = "Введите пароль")]
+        public string Password { get; set; }
     }
 }
