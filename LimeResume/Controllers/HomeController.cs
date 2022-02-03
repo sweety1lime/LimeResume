@@ -85,5 +85,16 @@ namespace LimeResume.Controllers
             List<Company> companies = db.Companies.ToList();
             return View(companies);
         }
+
+        public IActionResult AdminPage()
+        {
+            var resumes = db.Resumes.ToList();
+
+            var education = Convert.ToString(Request.Query["Education"]);
+            if (education != null)
+                resumes = resumes.Where(x => x.Education == education).ToList();
+
+            return View(resumes);
+        }
     }
 }
